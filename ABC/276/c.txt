@@ -1,0 +1,68 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+long long mod = 998244353;
+ 
+//int dp[200010];
+//string s[15];
+ 
+ 
+ 
+int main() {
+    int n;
+    cin >> n;
+    int p[n];
+    int a[n];
+    int b[n];
+    int c[n];
+    for(int i = 0; i < n ;i++){
+        cin >> p[i];
+        a[i] = p[i];
+        //b[i] = p[i];
+    }
+    sort(a,a+n);
+ 
+    
+    /*if(n > 11){
+        do {
+            //if(a[0] != p[0]) continue; 
+            int flag = 1;
+            for (int i = 0; i < n; i++) {
+                if(a[i] != p[i]){
+                    flag = 0;
+                }
+                b[i] = a[i];
+            }
+            if(flag){
+                for(int i = 0; i < n; i++){
+                    cout << c[i] << " ";
+                }
+                return 0;
+            }
+            for(int i = 0; i < n; i++){
+                c[i] = b[i];
+            }
+        } while(next_permutation(a, a + n));
+    }*/
+	int flag = 0;
+    do{
+      	if(flag == 0){
+          	flag = 1;
+        	continue;
+        }
+        for(int i = 0; i < n; i++){
+            cout << p[i] << " ";
+        }
+      	if(flag == 1) return 0;
+    }while(prev_permutation(p, p+n));
+    
+}
