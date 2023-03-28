@@ -1,0 +1,24 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <map>
+using namespace std;
+ 
+long long mod = 1000000007;
+ 
+int main(){
+    long long n;
+    long long ans;
+    cin >> n;
+ 
+    if(n == 0){
+        cout << 1 << endl;
+        return 0; 
+    }
+    ans = 1;
+    for(int i = 0; i < n; i++){
+        ans = ans * 2;
+    } 
+    cout << ans << endl;
+}

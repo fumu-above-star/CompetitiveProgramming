@@ -1,0 +1,59 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+long long mod = 998244353;
+ 
+const int INF = 1 << 29;
+
+int main() {
+    int R,C;
+    cin >> R >> C;
+    int sy,sx,gy,gx;
+    cin >> sy >> sx >> gy >> gx;
+    char c[50][50];
+    for(int i = 0 ; i < R; i++){
+        for(int j = 0; j < C; j++){
+            cin >> c[i][j];
+        }
+    }
+
+    //vector<vector<bool>> seen(50,vector<bool>(50,false))
+    queue<pair<int,int>> Q;
+    Q.push({sy-1,sx-1});
+    vector<vector<int>> dist(R,vector<int>(C,-1));
+    dist[sy-1][sx-1] = 0;
+    int dx[4] = {0,1,0,-1};//4近傍
+    int dy[4] = {1,0,-1,0};
+
+    while(!Q.empty()){
+        pair<int,int> v = Q.front();
+        Q.pop();
+        
+        
+        for(int i = 0; i < 4; i++){
+            pair<int,int> nv;
+            nv.first = v.first + dy[i];
+            nv.second = v.second + dx[i];
+
+            if(dist[nv.first][nv.second] != -1) continue;//既に探索済みならcontinue
+
+            if(c[nv.first][nv.second] == '.'){//通行可能ならqueueへ//壁の条件は要らないkamo
+                dist[nv.first][nv.second] = dist[v.first][v.second] + 1;
+                Q.push({nv.first,nv.second});
+            }
+        }
+
+    }
+    cout << dist[gy-1][gx-1] << endl;
+    
+}

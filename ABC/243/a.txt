@@ -1,0 +1,34 @@
+#include <iostream>
+#include <vector>
+#include <cctype>
+using namespace std;
+int main(){
+    int v,a,b,c;
+    cin >> v >>a >> b >> c;
+ 
+    while(v >= 0){
+        
+        if(v - a < 0){
+            cout << 'F' << endl;
+            break;
+        }else{
+            v=v-a;
+        }
+      	
+      //cout << v << endl;
+        if(v - b < 0){
+            cout << 'M' << endl;
+            break;
+        }else{
+            v = v-b;
+        }
+      
+        if(v - c < 0){
+            cout << 'T' << endl;
+            break;
+        }else{
+            v = v-c;
+        }
+    }
+    
+}

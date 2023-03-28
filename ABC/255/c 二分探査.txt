@@ -1,0 +1,37 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <map>
+using namespace std;
+
+long long mod = 1000000007;
+
+int main(){
+    long long x,a,d,n;
+    cin >> x >> a >> d >> n;
+
+    if(d < 0){//dがマイナスのときdを反転させて初項aと最終項を反転
+        long long finish = a + d*(n-1);
+        a = finish;
+        d*=-1;
+    }
+
+    long long start = 0, finish = (n-1);
+    while(start <= finish){//xにもっとも近い要素をにぶたんする
+        long long mid = (start+finish)/2;
+        if( (a+d*mid) <x){
+            start = mid + 1;
+        }else{
+            finish = mid - 1;
+        }
+    }//while文の条件から終了後にはstart > finishが保証される
+
+    long long ans = 8e18;
+    //0orstart-1からn-1orstart+1までにxに近い要素があるので全探査
+    for(long long i=max(0ll,start-1);i<=min((n-1),start+1);i++){
+        ans = min(abs(a+d*i-x),ans);
+    }
+
+    cout << ans << endl;
+}

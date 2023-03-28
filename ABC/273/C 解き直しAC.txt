@@ -1,0 +1,56 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+using P = pair<int,int>;
+
+long long mod = 998244353;
+ 
+const long long INF = 1LL << 60;//LL–Y‚ê
+const double PI = 3.1415926535;
+using ll = long long;
+
+bool compare_by_sec(pair<int, int> a, pair<int, int> b) {
+    if(a.second != b.second){
+        return a.second < b.second;
+    }else{
+        return a.first < b.first;
+    }
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    vector<int> a(n);
+    
+    for(int i = 0; i < n; i++){
+        cin >> a[i];
+    }
+    vector<int> cnt(n,0);
+    multiset<int> MS;//”š‚Ìí—Ş‚Æ‚»‚ê‚ª‰½ŒÂ‚ ‚é‚©?
+    //map<int> mp;//mp[”š] = í—Ş
+    sort(a.begin(),a.end(),greater<int>());
+    set<int> S;//set‚Å‘å‚«‚¢‡‚É“ü‚ê‚Ä‚­
+    for(int i = 0; i < n; i++){
+        if(S.count(a[i])){
+            MS.insert(S.size()-1);//sortÏ‚İ‚È‚Ì‚Åset‚ªd•¡‚·‚é‚Æ‚±‚ë‚Íí—Ş”‚ªˆê‚»‚ê©‘Ì‚Ì”‚ğŠÜ‚Ü‚È‚¢‚½‚ß‚É-1
+        }else{
+            MS.insert(S.size());
+            S.insert(a[i]);
+        }
+    }
+
+    for(int i = 0; i < n; i++){
+        cout << MS.count(i) << endl;
+    }
+
+}

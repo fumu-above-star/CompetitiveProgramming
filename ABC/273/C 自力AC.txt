@@ -1,0 +1,54 @@
+#include <iostream> //spfp
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+long long mod = 1000000007;
+ 
+
+int main()
+{ 
+  int n;
+  cin >> n;
+  map<int , int> mp;
+  vector<int> a(n,0);
+  for(int i = 0; i < n; i++){
+    int v;
+    cin >> v;
+    mp[v]++;
+    a[i] = v;
+  }//(1,1)(2,2)(7,1)(8,2)//1,278‚Ì3 2,78‚Ì2 7,8‚Ì1 8,{}‚Ì0
+  
+  sort(a.begin(),a.end());
+  vector<int> ans(n,0);
+  int numcnt = mp.size()-1;
+  int j = 0;
+  int tmp = -1;
+  
+  while(1){//”š‚Ì’†‚Åˆê”Ô‘å‚«‚¢‚à‚Ì‚ª0‚Ì‚Æ‚«‚ğ’S‚¤‚Ì‚Åans‚Ì“Y‚¦š‚ª0‚É‚È‚Á‚½‚Æ‚«j = n-1‚Æ‚È‚é‚æ‚¤numcnt‚ğg‚¤
+ 
+    if(a[j] == tmp){
+      j++;
+      continue;
+    }
+  	ans[numcnt] = mp[a[j]];
+    if(numcnt == 0) break;
+    numcnt--;
+    
+    tmp = a[j];
+    j++;
+  }
+  
+  for(int i = 0; i < n; i++){
+  	cout << ans[i] << endl;
+  }
+  
+  
+  
+}

@@ -1,0 +1,47 @@
+#include <iostream> //spfp
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+long long mod = 998244353;
+
+int main()
+{
+  int ax,ay,bx,by,cx,cy,dx,dy;
+  cin >> ax >> ay >> bx >> by >> cx >> cy >> dx >> dy;
+
+  int ans[4];
+  for(int i = 0; i < 4; i++){
+    ans[i] = 0;
+  }
+
+  ans[0] = (ax-bx)*(ay-dy) - (ay-by)*(ax-dx);
+  ans[1] = (bx-cx)*(by-ay) - (by-cy)*(bx-ax);
+  ans[2] = (cx-dx)*(cy-by) - (cy-dy)*(cx-bx);
+  ans[3] = (dx-ax)*(dy-cy) - (dy-ay)*(dx-cx);
+
+  //ans[0] = dx*by - dy*bx;
+  //ans[1] = ax*cy - ay*cx;
+  //ans[2] = bx*dy - by*dx;
+  //ans[3] = cx*ay - cy*ax;
+	
+  //for(int i = 0; i < 4; i++){
+  	//cout << ans[i] << endl;
+  //}
+  for(int i = 0; i < 4; i++){
+    if(ans[i] < 0){
+      cout << "No" << endl;
+      return 0;
+    }
+  }
+  cout << "Yes" << endl;
+  
+
+  
+}

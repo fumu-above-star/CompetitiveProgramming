@@ -1,0 +1,39 @@
+#include <iostream> //spfp
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+long long mod = 1000000007;
+ 
+long long cnt[200002];
+int main()
+{ 
+  int n;
+  cin >> n;
+
+  long long p[n];
+  //map<long long,int>mp;
+  for(int i = 0; i < n; i++){
+    cin >> p[i];
+    //mp[p[i]] = i;
+  }
+
+  //dist[0] = i - j % n
+  for(int i = 0; i < n ; i++){
+    for(int j = 0; j < 3; j++){//cnt[3-0-1],cnt[3+1-1],cnt[3+2-1]
+    	cnt[(p[i] - 1 - i + j +n)%n]++;//p[i]‚Ì—¿—‚ðlp[i]‚Ì‚Æ‚±‚ë‚É‚à‚Á‚Ä‚¢‚­
+    }
+  }
+  long long ans = 0;
+  for(int i = 0; i < n; i++){
+    ans = max(ans,cnt[i]);
+  }
+
+  cout << ans << endl;
+}

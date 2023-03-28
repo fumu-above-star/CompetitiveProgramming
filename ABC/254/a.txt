@@ -1,0 +1,15 @@
+#include <iostream>
+using namespace std;
+ 
+int main(){
+	int n;
+  	cin >> n;
+  
+  	int a[3];
+  	int keta = 100;
+  	//while(keta%10 != 0){
+    	
+    //}
+  	
+  	printf("%02d",n%100);
+}

@@ -1,0 +1,35 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+using P = pair<int,int>;
+
+long long mod = 998244353;
+ 
+//const int INF = 1 << 29;
+
+const double PI = 3.1415926535;
+
+int main() {
+  double a,b,x;
+  cin >> a >> b >> x;
+
+  double half = a*a*b/2;
+  double ans;
+
+  if( x < half) ans = atan(a*b*b/(2.0*x));//”¼•ª‚æ‚è‘½‚¢‚©‚Åê‡•ª‚¯
+  else ans = atan( y /(2.0*b - 2.0*x / (a*a)) );//‘äŒ`‚Ì–ÊÏ‚ðl‚¦‚é
+
+  ans = ans / PI * 180;
+
+  printf("%.10f\n",ans);
+
+}

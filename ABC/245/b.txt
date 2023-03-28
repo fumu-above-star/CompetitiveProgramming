@@ -1,0 +1,33 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+ 
+int a[2001];
+int mi = 0;
+int n;
+void rec(){
+    
+    for(int i = 0; i < n; i++){
+        if(mi == a[i]){
+            mi++;
+            rec();
+        }
+    }
+}
+ 
+int main(){
+    //int n;
+    cin >> n;
+ 
+    for(int i = 0; i < n; i++){
+        cin >> a[i];
+    }
+    
+   
+    rec();
+ 
+    
+ 
+    cout << mi << endl;
+ 
+}

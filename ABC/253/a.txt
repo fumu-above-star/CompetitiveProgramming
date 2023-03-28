@@ -1,0 +1,15 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+ 
+int main(){
+	int a,b,c;
+  	cin >> a >> b >> c;
+  	int ma,mi;
+  
+  	ma = max(a,max(b,c));
+  	mi = min(a,min(b,c));
+  
+  	if(b != ma && b != mi || a == b && b == c || a == b || b == c) cout << "Yes" << endl;
+  	else cout << "No" << endl;
+}

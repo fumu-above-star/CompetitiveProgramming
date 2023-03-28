@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+using namespace std;
+using Graph = vector<vector<int> >;
+
+long long mod = 998244353;
+
+int main(){
+    int n, x, y;
+	cin >> n >> x >> y;
+	if(n == 1){
+		cout << 0 << endl;
+		return 0;
+	}
+
+	long long r[11];
+	long long b[11];
+	
+	r[1] = 0;//ƒŒƒxƒ‹‚P‚ÌÂ‚¢•óÎ‚ÌŒÂ”
+	b[1] = 1;
+	for(int i = 2; i <= n; i++){
+		b[i] = r[i-1] + b[i-1] * y;
+		r[i] = r[i-1] + b[i]*x;
+	}
+
+	cout << r[n] << endl; //ƒŒƒxƒ‹‚Ž‚ÌÔ‚©‚ç“¾‚ç‚ê‚éÂÎ‚Ì”
+    return 0;
+}

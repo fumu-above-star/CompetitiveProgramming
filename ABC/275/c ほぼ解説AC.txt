@@ -1,0 +1,67 @@
+#include <iostream> 
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+using P = pair<int,int>;
+
+long long mod = 998244353;
+ 
+const long long INF = 1LL << 60;//LL–Y‚ê
+const double PI = 3.1415926535;
+using ll = long long;
+
+vector<string> s(9);
+
+int dist(int ax,int ay,int bx,int by)
+{
+    int dx = ax - bx;
+    int dy = ay - by;
+    return dx*dx + dy*dy;
+}
+
+bool valid(int x, int y)
+{
+    if( (0 <= x && 9 > x) && (0 <= y && 9 > y) && s[x][y] == '#') return true;
+    return false;
+}
+
+int main()
+{
+    
+    for(int i = 0; i < 9; i++){
+        cin >> s[i];
+    }
+
+    set<set<pair<int,int>>> S;
+
+    for(int i = 0; i < 9; i++){
+        for(int j = 0; j < 9; j++){
+            for(int dx = -8; dx < 9; dx++){
+                for(int dy = -8; dy < 9; dy++){
+                    if(!dx && !dy) continue; // !dx && !dy dx ‚Æ dy‚ª0‚ÌŽž‚Ícontinue;
+                    int i2 = i + dx, j2 = j + dy;
+                    int i3 = i2 - dy, j3 = j2 + dx;
+                    int i4 = i3 - dx, j4 = j3 - dy;
+                    if(valid(i,j) && valid(i2,j2) && valid(i3,j3) && valid(i4,j4) ){
+                        set<pair<int,int>> sq;
+                        sq.insert({i,j});
+                        sq.insert({i2,j2});
+                        sq.insert({i3,j3});
+                        sq.insert({i4,j4});
+                        S.insert(sq);
+                    }
+                }
+            }
+        }
+    }
+
+    cout << S.size() << endl;
+}

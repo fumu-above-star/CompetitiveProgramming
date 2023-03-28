@@ -1,0 +1,69 @@
+#include <iostream> //spfp
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+long long mod = 1000000007;
+ 
+
+int main()
+{
+  int h1,w1,h2,w2;
+  cin >> h1 >> w1;
+  vector<vector<int>> a(h1,vector<int>(w1));
+  for(int i = 0; i < h1; i++){
+    for(int j = 0; j < w1; j++){
+      cin >> a[i][j];
+    }
+  }
+
+  cin >> h2 >> w2;
+  vector<vector<int>> b(h2,vector<int>(w2));
+  for(int i = 0; i < h2; i++){
+    for(int j = 0; j < w2; j++){
+      cin >> b[i][j];
+    }
+  }
+
+  for(int hs = 0; hs < (1 << h1); hs++){
+    for(int ws = 0; ws < (1 << w1); ws++){
+      
+      vector<int> is,js;
+      for(int i = 0; i < h1; i++){//c‚Ì‚µ‚é‚µ
+        if(hs >> i & 1){
+          is.push_back(i);
+        }
+      }
+      for(int j = 0; j < w1; j++){//‰¡‚Ì‚µ‚é‚µ
+        if(ws >> j & 1){//1‚ÌêŠ‚ğ’²‚×‚éif
+          js.push_back(j);
+        }
+      }
+
+      if(is.size() != h2) continue;
+      if(js.size() != w2) continue;
+
+      vector<vector<int>> c(h2,vector<int>(w2));
+      for(int i = 0; i < h2; i++){
+        for(int j = 0; j < w2; j++){
+          c[i][j] = a[is[i]][js[j]];
+        }
+      }
+
+      if(b == c){//vector‚Å‚Í == ‚ªg‚¦‚é
+        cout << "Yes" << endl;
+        return 0;
+      }
+
+    }
+  
+  }
+  
+  cout << "No" << endl;
+}

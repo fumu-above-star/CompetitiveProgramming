@@ -1,0 +1,36 @@
+#include <iostream> //spfp
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+long long mod = 998244353;
+ 
+//int dp[200010];
+
+long long rowsum(long long n)
+{
+   return n*(n+1)/2;
+}
+
+map<long long, long long> memo;//10^18‚Å‹ð’¼‚É”z—ñ‚ÍŽæ‚ê‚È‚©‚Á‚½‚Ì‚Åmap‚ðŽv‚¢‚Â‚­‚×‚«‚¾‚Á‚½
+long long f(long long k){
+    if(k == 0) return 1;
+    if(memo.count(k) == 0){
+        memo[k] = f(x/2) + f(x/3);
+    }
+    return memo[k];
+}
+
+int main(){
+    long long n;
+    cin >> n;
+ 
+    cout << f(n) << endl;
+
+}

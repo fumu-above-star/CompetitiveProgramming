@@ -1,0 +1,24 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+long long mod = 998244353;
+ 
+ 
+int main(){
+    static const double pi = 3.1415926535;
+    int a,b,d;
+    cin >> a >> b >> d;
+    double e,f;
+    e = (double)a*cos((double)d/180*pi) - (double)b*sin((double)d/180*pi);
+    f = (double)a*sin((double)d/180*pi) + (double)b*cos((double)d/180*pi);
+ 
+	printf("%12f ",e);
+  	printf("%12f\n",f);
+    return 0;
+}

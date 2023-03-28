@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <map>
+using namespace std;
+
+long long mod = 1000000007;
+
+int main(){
+    int n,x,ans;
+    string s;
+    vector<pair<int,char> > a;
+    cin >> n;
+    cin >> s;
+    ans = 0;
+    for(int i = 0; i < n; i++){
+        cin >> x;
+        a.push_back({x,s[i]});
+        if(s[i] == '1') ans++;
+    }
+    sort(a.begin(),a.end());
+    x = ans;
+    for(int i = 0; i < n; i++){//右側に大人左側に子供となるようにピボットを決める
+        if(a[i].second == '1')x--;//ピボットを一つ右にずらした時ピボットが子供であれば1増やす逆なら減らす
+        else x++;
+        if(i < (n-1)){//ピボットが左端から右端に移動するまで
+            if(a[i].first != a[i + 1].first) ans = max(ans,x);
+        }//線を挟む 2 人の体重が異なる, あるいは線が一番左または一番右にある
+        else ans = max(ans,x);
+    }
+    cout << ans << endl;
+}

@@ -1,0 +1,34 @@
+#include <iostream> //spfp
+#include <vector>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+long long mod = 998244353;
+ 
+//int dp[200010];
+ 
+long long rowsum(long long n)
+{
+   return n*(n+1)/2;
+}
+ 
+int main(){
+    long long a,b,c,d,e,f;
+    cin >> a >> b >> c >> d >> e >> f;
+ 	
+  	long long ans;
+  	long long x = ((a % mod)*(b % mod)) % mod;//(a*b)%mod == a%mod * b % mod‚æ‚è
+  	x = (x * (c % mod)) % mod;
+  	long long y = ((d % mod)*(e % mod)) % mod;
+  	y = (y * (f % mod)) % mod;
+
+    ans = (x + mod - y)%mod; // x < y‚Ì‰Â”\«‚ª‚ ‚é‚½‚ßx+mod
+    cout << ans << endl;
+ 
+}

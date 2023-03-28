@@ -1,0 +1,59 @@
+#include <iostream> 
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+using P = pair<int,int>;
+
+long long mod = 998244353;
+ 
+const long long INF = 1LL << 60;//LL忘れ
+const double PI = 3.1415926535;
+using ll = long long;
+
+bool valid(int x,int y,vector<string> &s)
+{   
+    if( x < 0 || x > 8 || y < 0 || y > 8) return false; //ここでミスx > 9 y > 9は9をtrueにする
+    if(s[y][x] == '#') return true;
+    return false;
+}
+
+int main()
+{
+    vector<string> s(9);
+    for(int i = 0; i < 9; i++){
+        cin >> s[i];
+    }
+
+    set<set<pair<int,int>>> S;
+    for(int y = 0; y < 9; y++){
+        set<pair<int,int>> st;
+        for(int x = 0; x < 9; x++){
+            for(int dy = -8; dy < 9; dy++){
+                for(int dx = -8; dx < 9; dx++){
+                    int y1 = y + dy ,x1= x + dx;
+                    int y2 = y1 + dx ,x2 = x1 - dy;
+                    int y3 = y2 - dy ,x3 = x2 - dx;
+                    if(dx == 0 && dy == 0) continue;
+                    if(valid(x,y,s) && valid(x1,y1,s) && valid(x2,y2,s) && valid(x3,y3,s)){
+                        set<pair<int,int>> st;//ここでミスsetには正方形の4点しか含んではいけない
+                        st.insert({x,y});
+                        st.insert({x1,y1});
+                        st.insert({x2,y2});
+                        st.insert({x3,y3});
+                        S.insert(st);
+                    }
+                }
+            }
+        }
+    }
+    cout << S.size() << endl;
+
+}

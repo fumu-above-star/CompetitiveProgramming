@@ -1,0 +1,43 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+long long mod = 998244353;
+
+const int INF = 1 << 29;
+int main() {
+    int n;
+    cin >> n;
+    int x[n];
+    for(int i = 0; i < n; i++) cin >> x[i];
+
+    int mi = 9999999;
+    int sum = 0;
+    int maxi;
+    int ma = 0;
+    for(int i = 0; i < n; i++){
+        if(x[i] > ma){
+            maxi = i;
+            ma = x[i];
+        }
+    }
+    for(int i = 0; i < ma; i++){
+      	sum = 0;
+        for(int j = 0; j < n; j++){
+            sum += (x[j] - (i+1))*(x[j] - (i+1));
+        }
+        mi = min(mi, sum);
+    }
+
+    
+    cout << mi << endl;
+}
