@@ -1,0 +1,40 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+using P = pair<int,int>;
+
+long long mod = 998244353;
+ 
+const long long INF = 1LL << 60;//LL忘れ
+const double PI = 3.1415926535;
+
+int main() {//'a'は97
+  string s;
+  cin >> s;
+
+  int slen = s.size();
+  
+  char a = 'A';
+  char c = 'Z';
+  long long id = 0;
+  int digit = slen;
+  long long pow26 = 1;
+  for(int i = 0; i < slen; i++){
+    pow26 = 1;//pow26をそのままにした(1敗)
+    int digitnum = (int)s[i] - (int)a + 1;
+    for(int j = i; j < digit-1; j++) pow26 *=26;
+    id += digitnum*pow26;
+  }
+  cout << id << endl;
+  //cout << (int)c << endl;
+}
+//（C++ での文字コードは処理系定義ですが、ASCII においては）'@' == 'A' - 1 なので、よくある c - 'A' + 1 の代わりに c - '@' と書くこともできます。

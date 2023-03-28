@@ -1,0 +1,85 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+using P = pair<int,int>;
+
+long long mod = 998244353;
+ 
+const long long INF = 1LL << 60;//LL–Y‚ê
+const double PI = 3.1415926535;
+
+int main() {//'a'‚Í97
+  string s;
+  cin >> s;
+
+  int slen = s.size();
+  map<string,long long> mp;
+  mp["00"] = 0;
+  mp["0"] = 0;
+  mp["1"] = 0;
+  mp["2"] = 0;
+  mp["3"] = 0;
+  mp["4"] = 0;
+  mp["5"] = 0;
+  mp["6"] = 0;
+  mp["7"] = 0;
+  mp["8"] = 0;
+  mp["9"] = 0;
+
+  int zeroflag = 0;
+  for(int i = 0; i < slen; i++){
+    if(zeroflag){
+      zeroflag = 0;
+      continue;
+    }
+    if(s[i] == '0'){
+      if( (i + 1) < slen){
+        if( s[i+1] == '0'){
+          mp["00"]++;
+          zeroflag = 1;
+          continue;
+        }else{
+      	  mp["0"]++;
+        }
+      }else{
+      	mp["0"]++;
+      }
+    }
+    
+    if(s[i] == '1')mp["1"]++;
+    if(s[i] == '2')mp["2"]++;
+    if(s[i] == '3')mp["3"]++;
+  	if(s[i] == '4')mp["4"]++;
+    if(s[i] == '5')mp["5"]++;
+    if(s[i] == '6')mp["6"]++;
+    if(s[i] == '7')mp["7"]++;
+    if(s[i] == '8')mp["8"]++;
+    if(s[i] == '9')mp["9"]++;
+
+  }
+  long long actcnt = 0;
+  
+  actcnt += mp["00"];
+  actcnt += mp["0"];
+  actcnt += mp["1"];
+  actcnt += mp["2"];
+  actcnt += mp["3"];
+  actcnt += mp["4"];
+  actcnt += mp["5"];
+  actcnt += mp["6"];
+  actcnt += mp["7"];
+  actcnt += mp["8"];
+  actcnt += mp["9"];
+
+  
+  cout << actcnt << endl;
+}

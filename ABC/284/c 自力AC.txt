@@ -1,0 +1,103 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+using P = pair<int,int>;
+
+long long mod = 998244353;
+ 
+const long long INF = 1LL << 60;//LL忘れ
+const double PI = 3.1415926535;
+
+struct UnionFind{
+    vector<int> par, rank, tsize;//par(x) xの親頂点
+    //rank(x) xの属する根付き木の高さ tsize(x) 要素xの属する根付き木に含まれる頂点数
+    
+    //集合の最小ノード用
+    /*vector<int> min_node;*/
+
+    //構造体の初期化
+    UnionFind(int n) : par(n,-1), rank(n,0), tsize(n,1)/*, min_node(n)*/ {
+         //初期状態ではmin_nodeは自分自身
+        /*for(int v = 0; v < n; v++) min_node[v] = v;*/
+    }
+
+    //根を求める
+    int root(int x){
+        if(par[x] == -1) return x; // xが根の場合はxを返す
+        else return par[x] = root(par[x]); //経路圧縮
+    }
+
+    //xとyが同じグループに属するか(根が一致するか)
+    bool issame(int x, int y){
+        return root(x) == root(y);
+    }
+
+    // xを含むグループとyを含むグループを併合する
+    bool unite(int x, int y){//rxにryをくっつける
+        int rx = root(x), ry = root(y);
+        if(rx == ry) return false; //すでに同じグループの時は何もしない
+        // union by rank
+        if(rank[rx] < rank[ry]) swap(rx,ry); //ry側のrankが小さくなるようにする
+        par[ry] = rx; //ry を rx　の子とする
+        if(rank[rx] == rank[ry]) rank[rx]++; //rx側のrankを調整する 4 <- 5 が　0 <- 4 <- 5 になるので+1 
+        tsize[rx] += tsize[ry]; // rx側のtsizeを調整する
+
+        //min_node の更新
+        /*min_node[rx] = min(min_node[rx],min_node[ry]);*/
+        return true;
+    }
+
+    // xを含む根付き木のサイズを求める
+    int size(int x){
+        return tsize[root(x)];
+    }
+
+    /*
+    int get_min_node(int x){
+        return min_node[root(x)];
+    }
+    */
+};
+
+//使用例
+//初期化 UnionFind uf(n);
+//関数使用 uf.issame(a,b); uf.unite(a,b);
+
+
+int main() {//'a'は97
+  int n,m;
+  cin >> n >> m;
+  UnionFind uf(n);
+  int ans = n;
+  for(int i = 0; i < m; i++){
+    int a,b;
+    cin >> a >> b;
+    a--,b--;
+    uf.unite(a,b);
+  }
+
+  int rootcnt = 0;
+  vector<int> rootnum(n,-1);
+  int flag;
+  for(int i = 0; i < n; i++){
+    flag = 1;
+    for(int j = 0; j < rootcnt; j++){
+      if(rootnum[j] == uf.root(i)){
+        flag = 0;
+        break;
+      }
+    }
+  
+    if(flag) rootnum[rootcnt++] = uf.root(i);
+  }
+  cout << rootcnt << endl;
+}
