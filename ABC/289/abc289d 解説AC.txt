@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+
+int main() {
+    using namespace std;
+
+    unsigned long N;
+    cin >> N;
+    vector<unsigned long> A(N);
+    for (auto &&a : A)
+        cin >> a;
+
+    unsigned long M;
+    cin >> M;
+    vector<unsigned long> B(M);
+    for (auto &&b : B)
+        cin >> b;
+
+    unsigned long X;
+    cin >> X;
+    // dp[i] := i 段目に登れるか
+    // available[i] := i 段目にモチがあるか
+    vector<unsigned long> dp(X + 1), available(X + 1, 1);
+    for (const auto b : B)
+        available[b] = 0;
+
+    // 0 段目には登れる
+    dp[0] = 1;
+    for (unsigned long i{1}; i <= X; ++i)
+        if (!available[i])
+            // モチがあると、登れない
+            dp[i] = 0;
+        else
+            // モチがないとき、dp[i - a] の or が答え
+            for (const auto a : A)
+                if (i >= a)
+                    dp[i] |= dp[i - a];
+
+    cout << (dp[X] ? "Yes" : "No") << endl;
+
+    return 0;
+}

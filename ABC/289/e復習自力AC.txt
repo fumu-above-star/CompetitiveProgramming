@@ -1,0 +1,60 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+using P = pair<int,int>;
+
+long long mod = 998244353;
+ 
+//const int INF = 1 << 29;
+
+void solve(){
+    int n,m;
+    cin >> n >> m;
+    int c[n];
+    Graph G(n);
+    
+    for(int i = 0; i < n; i++) cin >> c[i];
+
+    for(int i = 0; i < m; i++){
+        int a,b;
+        cin >> a >> b;
+        a--,b--;
+        G[a].push_back(b);
+        G[b].push_back(a);
+    }
+    //const int INF = 1000100000;
+    queue<P> Q;
+    vector<vector<int>> dist(n,vector<int>(n,-1));//2000*2000 = 4000000
+    Q.emplace(0,n-1);
+    dist[0][n-1] = 0;
+    while(!Q.empty()){
+        pair<int,int> v = Q.front();
+        Q.pop();
+        for(auto nvf : G[v.first]){
+            for(auto nvs : G[v.second]){
+                if(c[nvf] == c[nvs]) continue;
+                if(dist[nvf][nvs] != -1) continue;
+                dist[nvf][nvs] = dist[v.first][v.second] + 1;
+                Q.emplace(nvf,nvs);
+            }
+        }
+    }
+    cout << dist[n-1][0] << endl;
+}
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--){
+        solve();
+    }
+}   

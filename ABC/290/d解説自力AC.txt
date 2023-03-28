@@ -1,0 +1,45 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+//long long mod = 998244353;
+ 
+const int INF = 1 << 29;
+
+int gcd(int a, int b){ //a < b ‚Ì‚Æ‚« a % b == a ‚È‚Ì‚ÅŒ‹‹Ç gcd(b, a) ‚É‹AŒ‹‚µ‚Ü‚·B
+    if(a % b == 0) return b;
+    return gcd(b, a%b);
+}
+
+int main() {
+    int t;
+    cin >> t;
+
+    while(t--){
+        long long N,D,K;
+        cin >> N >> D >> K;
+
+        long long a = 0;
+      	long long n;
+        long long x;
+        // Nd = nD; N = gn,D=gd
+        
+      	a =  (K-1)/(N/gcd(N,D));//2n+i/n
+        //n = N /gcd(N,D); // n = N/g N = gn‚¾‚©‚ç//a =  (k-1)/N/gcd(N,D);
+        //x = (K-1)/n + (K-1)*D % N;
+      	x = a + (K-1)*D % N;
+        cout << x << endl;
+    }
+        
+    
+    
+}    

@@ -1,0 +1,53 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+long long mod = 998244353;
+
+const int INF = 1 << 29;
+int dp[2100101];//こんなに多く取らずj+a[i]の最大値程度まででよい
+int main() {
+    int n;
+    cin >> n;
+    int a[n+1];
+    for(int i = 1; i <= n; i++) cin >> a[i];
+    int m;
+    cin >> m;
+    int b[m+1];
+    for(int i = 1; i <= m; i++) cin >> b[i];
+    int x;
+    cin >> x;
+	
+  	for(int i = 0; i <=2100100; i++ )dp[i] = 0;//初期化
+    //moti
+    for(int j = 1; j <= m; j++){
+        dp[b[j]] = -1;
+    }
+
+    dp[0] = 1;
+    for(int i = 0; i <= 100001; i++){
+        for(int j = 1; j <= n; j++){
+            if(dp[i] == 1){//初期はdp[i]としておりそれもあってコンテスト中ACを逃した-1のパターンを忘れるな
+                if(dp[i+a[j]] == -1) continue;//continueにしたらいけた
+                dp[i+a[j]] = 1;
+                
+            }
+        }
+    }
+
+
+       	if(dp[x] == 1){
+            cout << "Yes" << endl;
+        }else{
+    		cout << "No" << endl;
+        }
+}

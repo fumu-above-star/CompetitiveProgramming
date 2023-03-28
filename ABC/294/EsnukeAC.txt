@@ -1,0 +1,53 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+using P = pair<int,int>;
+
+long long mod = 998244353;
+ 
+const long long INF = 1LL << 60;//LL忘れ
+const double PI = 3.1415926535;
+using ll = long long;
+
+int main()
+{
+    ll L;
+    vector<int> n(2);
+    cin >> L >> n[0] >> n[1];
+    vector<pair<ll,P>> events;//(時刻,(行,値))
+    for(int i = 0; i < 2; i++){
+        ll t = 0;
+        for(int j = 0; j < n[i]; j++){
+            int v; ll l;
+            cin >> v >> l;
+            events.emplace_back(t,P(i,v));//イベントが起こる時刻とその時の行と値を受け取る
+            t += l;//lと1を見間違えました・・・//連長圧縮の切れ目を記録する
+        }
+    }
+    sort(events.begin(), events.end());//tの順番時系列順に並べる
+    events.emplace_back(L,P(0,0));//ケツに入れる
+
+    vector<int> val(2);
+    ll pt = 0;//現在から1つ前の時刻
+    ll ans = 0;
+    for( auto [t,p] : events){//尺取り法のイメージで進んでいく
+        if(val[0] == val[1]) ans += t-pt;//上と下の部分行が
+        auto[i,v] = p;  
+        val[i] = v;
+        pt = t;
+    }
+
+    cout << ans << endl;
+    return 0;
+  	
+
+}

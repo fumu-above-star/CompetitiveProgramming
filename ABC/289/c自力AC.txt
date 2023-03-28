@@ -1,0 +1,54 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+long long mod = 998244353;
+ 
+const int INF = 1 << 29;
+
+int main(){
+    int n,m;
+    cin >> n >> m;
+    vector<vector<int> > a(m);
+    int c[m];
+    for(int i = 0; i < m; i++){
+      cin >> c[i];
+      for(int j = 0; j < c[i]; j++){
+        int input;
+        cin >> input;
+        a[i].push_back(input);
+      }
+    }
+
+    int cnt = 0;
+    for(int mask = 1; mask < (1 << m); mask++){//集合の選び方を決める
+      set<int> S;
+
+      for(int i = 0; i < m; i++){//集合の内どの集合を選んだか確認する
+        if((mask >> i) & 1){//20230214 & -> && で間違えた
+          for(int j = 0; j < c[i]; j++){//集合の中の要素をsetに入れる
+            S.insert(a[i][j]);
+          }
+        }
+      }
+
+      bool flag = true;
+      for(int i = 1; i <= n; i++){//setに1~nまで含まれているか確認する
+        if(!S.count(i)){
+          flag = false;
+          break;
+        }
+      }
+      if(flag) cnt++;
+    } 
+    cout << cnt << endl;
+}

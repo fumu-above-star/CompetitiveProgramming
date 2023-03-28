@@ -1,0 +1,67 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+using P = pair<int,int>;
+
+long long mod = 998244353;
+ 
+//const int INF = 1 << 29;
+
+void solve(){
+    int n,m;
+    cin >> n >> m;
+    int c[n];
+    Graph G(n);
+    for(int i = 0; i < n; i++){
+        cin >> c[i];
+    }
+    for(int i = 0; i < m; i++){
+        int u,v;
+        cin >> u >> v;
+        u--,v--;
+        G[u].push_back(v);
+        G[v].push_back(u);
+    }
+        
+    const int INF = 1001001001;
+    vector<vector<int>> dist(n,vector<int>(n,INF));
+    queue<P> Q;
+    auto push = [&](int i, int j, int d){
+        if(dist[i][j] != INF) return;
+        dist[i][j] = d;
+        Q.emplace(i,j);
+    };
+    push(0,n-1,0);//dist‚Ì‰Šú‰»‚àŒ“‚Ë‚Ä‚¢‚é
+    while(Q.size()){
+        auto [a,b] = Q.front(); Q.pop();
+        int d = dist[a][b];
+        for(int na : G[a]){
+            for(int nb: G[b]){
+                if(c[na] == c[nb]) continue;//! (c[na]^c[nb])(xor) ‚Å‚à‚æ‚¢
+                push(na,nb,d+1);//na,nb‚ğqueue‚É“ü‚ê‚Ä‹——£‚ğ+1‚µ‚ÄXV
+                
+            }
+        }
+    }
+
+    int ans = dist[n-1][0];
+    if(ans == INF) ans = -1;
+    cout << ans << endl;
+}
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--){
+        solve();
+    }
+}   

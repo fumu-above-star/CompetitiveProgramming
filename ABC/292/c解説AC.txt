@@ -1,0 +1,49 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+using P = pair<int,int>;
+
+long long mod = 998244353;
+ 
+const long long INF = 1LL << 60;//LL忘れ
+const double PI = 3.1415926535;
+using ll = long long;
+
+int main() {
+  long long n;
+  cin >> n;
+  
+  long long cnt = 0;
+ 
+  for(ll ab = 1; ab < n; ab++){
+    ll cd = n - ab;
+    ll abcnt = 0;
+    ll cdcnt = 0;
+    for(ll a = 1; a*a <= ab; a++){//a<=bと仮定して√nの探索をし、a>=bのパターンをa!=bのときに追加
+      if(ab % a == 0){
+        abcnt++;
+        if(ab != a*a) abcnt++;// a==bのときは1パターンしかないので1カウントのみそれ以外は2カウント
+      }
+      
+    }
+
+    for(ll c = 1; c*c <= cd; c++){
+      if(cd%c == 0){
+        cdcnt++;
+        if(cd != c*c) cdcnt++;
+      }
+    }
+    cnt += abcnt*cdcnt;//abとcdの組合せの数
+  }
+
+  cout << cnt << endl;
+}

@@ -1,0 +1,64 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+using P = pair<int,int>;
+
+long long mod = 998244353;
+ 
+const long long INF = 1LL << 60;//LL–Y‚ê
+const double PI = 3.1415926535;
+using ll = long long;
+
+int combination(int n, int r) {
+  if ( r * 2 > n ) r = n - r;
+  int dividend = 1;
+  int divisor  = 1;
+  for (  int i = 1; i <= r; ++i ) {
+    dividend *= (n-i+1);
+    divisor  *= i;
+  }
+  return dividend / divisor;
+}
+
+int main() 
+{
+  ll L;
+  int n[2];
+  cin >> L >> n[0] >> n[1];
+  
+  vector<pair<ll,P>> events;
+  for(int i = 0; i < 2; i++){
+    ll t = 0;
+    for(int j = 0; j < n[i]; j++){
+      int v; ll l;
+      cin >> v >> l;
+      events.emplace_back(t,P(i,v));
+      t += l;
+    }
+  }
+  sort(events.begin(),events.end());
+  events.emplace_back(L,P(0,0));
+
+  ll pt = 0;
+  vector<int> val(2);
+  ll ans = 0;
+  //cout << val[0] << val[1] << endl;
+  for(auto [t,p] : events){
+    if(val[0] == val[1]) ans += (t - pt);//val[0]val[1]‚Ì‰Šú’l‚ª‚½‚Æ‚¦“¯ˆê‚Å‚àt‚Æpt‚ª‰Šú‚Í‚O‚Å‚ ‚é‚©‚ç–â‘è‚È‚¢
+    auto[i,v] = p;
+    val[i] = v;
+	pt = t;
+  }
+
+  
+  cout << ans << endl;
+}

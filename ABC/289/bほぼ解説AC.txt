@@ -1,0 +1,46 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+long long mod = 998244353;
+
+const int INF = 1 << 29;
+
+int main() {
+   int n, m;
+   cin >> n >> m;
+   int a[m];
+   for(int i = 0; i < m; i++){
+        cin >> a[i];
+   }
+   vector<int> ans;
+   int l,r;
+   l = 1;//’²‚×‚Ä‚¢‚È‚¢®”‚Ì‚¤‚¿Å¬‚Ì®”
+   int j = 0;
+   while(l <= n){
+        r = l;
+        
+        while(r == a[j]){
+            r++;
+            j++;
+        }
+        int rl = r;
+        while(rl != l-1){//rl‚Íl‚àans‚É‰Á‚¦‚é–ğ–Ú‚ğ‚Â‚½‚ßrl != l-1
+            ans.push_back(rl);
+            rl--;
+        }
+        l = r+1;
+   }
+    for(auto e: ans){
+        cout << e << " "; 
+    }
+}
