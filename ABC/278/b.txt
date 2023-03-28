@@ -1,0 +1,52 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+long long mod = 998244353;
+
+int is_24hours(int h,int m){
+    if(0 <= h && h <= 23 && 0 <= m && m <= 59){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+
+int missjudge(int h,int m){
+    int a,b,c,d;
+    a = (h/10)%10;
+    b = h%10;
+    c = (m/10)%10;
+    d = d%10;
+    int ac = a*10 + c;
+    int bd = b*10 + d;
+
+    return is_24hours(ac,bd);
+}
+
+int main(){
+    int h,m;
+    cin >> h >> m;
+
+    while(!missjudge(h,m)){
+        m++;
+        if(m == 60){
+            h++;
+            if(h == 24){
+                h = 0;
+            }
+            m = 0;
+        }
+    }
+    cout << h << " " << m << endl;
+}
+   

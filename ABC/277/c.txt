@@ -1,0 +1,62 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+long long mod = 998244353;
+//map<int,vector<int>> G;
+ 
+int main() {//–â‘è‚ð‚±‚Ì”—ñ‚Ì—v‘fx
+    int n;
+    cin >> n;
+    map<int, vector<int>> G;
+    for(int i = 0; i < n; i++){
+        int a,b;
+        cin >> a >> b;
+        G[a].push_back(b);
+        G[b].push_back(a);
+    }
+    queue<int> Q;
+   	Q.push(1);
+    set<int> S;
+    S.insert(1);
+    while(!Q.empty()){
+        int v = Q.front();
+        Q.pop();
+        for(int nv : G[v]){
+            if(!S.count(nv)){
+                Q.push(nv);
+                S.insert(nv);
+            }
+        }
+    }
+    cout << *S.rbegin() << endl;
+ 
+  	/*
+  	set<int> s1;
+  	s1.insert(0);
+  	s1.insert(2);
+  	s1.insert(3);
+  	s1.insert(9);
+  	s1.insert(15);
+  	
+  	cout << *s1.begin() << endl;
+  	cout << *s1.end() << endl;
+  	cout << *s1.rbegin() << endl;
+  	cout << *s1.rend() << endl;
+    */
+
+    /*map‚ð“ñŽŸŒ³”z—ñ‚ÅŽg‚¦‚é
+        map<char, vector<int>> mp;
+  	    mp['a'].push_back(6);
+  	    cout << mp['a'][0] << endl;
+    */
+}

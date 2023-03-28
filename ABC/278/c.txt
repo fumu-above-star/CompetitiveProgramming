@@ -1,0 +1,37 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+long long mod = 998244353;
+
+
+ 
+
+int main(){
+    int n,q;
+    cin >> n >> q;
+    
+    set<pair<int,int>> follows;//setはkeyとvalueが一緒になったmapに近い
+
+    for(int _ = 0; _ < q; _++){
+      	int t,a,b;
+        cin >> t >> a >> b;
+        if(t == 1){
+            follows.emplace(a,b);//emplace はkeyとvalueをコピーせず代入できる関数
+        }else if(t == 2){
+            follows.erase({a,b});//{a,b}の集合は消えても{b,a}の集合は消えない
+        }else{//条件式?trueの処理:falseの処理
+            cout << (follows.count({a,b}) && follows.count({b,a}) ? "Yes" : "No") << endl;
+        }
+    }
+
+}

@@ -1,0 +1,62 @@
+#include <iostream> //spfp
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <map>
+#include <utility> //pair
+#include <queue>
+#include <set>
+#include <iomanip>//setprecision
+using namespace std;
+using Graph = vector<vector<int> >;
+ 
+long long mod = 998244353;
+ 
+int main(){//s‚ðt‚É
+    int H,W;
+    cin >> H >> W;
+    vector<string> s;
+    vector<string> t;
+  	s.resize(H);
+  	t.resize(H);
+    for(int h = 0; h < H; h++){
+        cin >> s[h];
+    }
+    for(int h = 0; h < H; h++){
+        cin >> t[h];
+    }
+    
+    vector<int> scnt(H,0);
+    vector<int> tcnt(H,0);
+    
+  	for(int h = 0; h < H; h++){
+        for(int w = 0; w < W; w++){
+            if(s[h][w] == '#'){
+                scnt[h]++;
+            }
+        }
+    }
+ 
+    for(int h = 0; h < H; h++){
+        for(int w = 0; w < W; w++){
+            if(t[h][w] == '#'){
+                tcnt[h]++;
+            }
+        }
+    }
+ 
+    int flag = 1;
+    for(int h = 0; h < H; h++){
+        if(tcnt[h] != scnt[h]){
+            flag = 0;
+            break;
+        }
+    }
+ 
+    if(flag){
+        cout << "Yes" << endl;
+    }else{
+        cout << "No" << endl;
+    }
+}
